@@ -1,3 +1,4 @@
+package InchiriereMasina;
 
 public class MainClass
 {
