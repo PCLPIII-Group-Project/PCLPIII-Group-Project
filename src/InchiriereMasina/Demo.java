@@ -27,5 +27,25 @@ public class Demo
     masini = Masina.load();
     
     System.out.println( masini );
+    
+    
+    Adresa a1 = new Adresa("Republicii", 7, 52, "A", 3, 14, "Brasov", "Brasov" );
+    Client c1 = new Client("Nicolae", "Paul", "0775623759", a1, "1965782145697");
+    
+    Adresa a2 = new Adresa("Anotimpului", 11, 32, "3B", 8, 45, "Constanta", "Constanta");
+    Client c2 = new Client("Popescu", "Alexandru", "0723459287", a2, "1890425297865");
+
+    ArrayList<Client> clienti = new ArrayList<Client>();
+    
+    clienti.add(c1);
+    clienti.add(c2);
+    
+    Client.save(clienti);   
+    
+    clienti = null;
+    
+    clienti = Client.load();
+    
+    System.out.println(clienti);   
   }
 }
