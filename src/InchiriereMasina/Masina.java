@@ -60,7 +60,7 @@ public class Masina
   }
     
   //salvare
-  static void save(ArrayList<Masina> masini)
+  static void save(ArrayList<Masina> masini) //TODO: change file type to csv
   {
     if (masini == null || masini.size() == 0)
     {
@@ -162,7 +162,7 @@ public class Masina
     return marca + " " + model + " " + combustibil + " " + anulDeFabricare + " " + pretPeZi 
         + " " + cutieDeVitezaAutomata + " " + preluare + " " + returnare + " " + kilometraj 
         + " " + capacitateCilindrica + " " + numarDeLocuri + " " + numarDeUsi + " " + normaDePoluare 
-        + " " + culoare + " \r\n";
+        + " " + culoare;
   }
   
   //setteri si getteri
@@ -216,7 +216,7 @@ public class Masina
     this.pretPeZi = pretPeZi;
   }
 
-  public boolean isCutieDeVitezaAutomata()
+  public boolean getCutieDeVitezaAutomata()
   {
     return cutieDeVitezaAutomata;
   }

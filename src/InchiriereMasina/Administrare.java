@@ -2,7 +2,7 @@ package InchiriereMasina;
 
 import java.util.ArrayList;
 
-public class Administrare
+public class Administrare //TODO: convert to singleton
 {
   private ArrayList<Masina> masini;
   
