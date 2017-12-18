@@ -1,3 +1,2 @@
 Audi RS7 Benzina 2017 500.0 false 27/11/2017 1/1/2018 10205.12 4000.0 5 5 Euro2 AlbastruInchis 
 Tesla Roadster Electricitate 2017 300.0 true 26/11/2017 1/2/2018 1005.22 4000.0 2 3 NuPoluaza RosuInchis 
-Audi A4 Benzina 2012 50.0 false 11/12/2017 31/12/2017 190222.0 2000.0 5 5 Euro2 Negru 

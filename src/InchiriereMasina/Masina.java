@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Masina
+public class Masina //implements Comparable<Masina>
 {
   //constante
   static private final String LOC_FISIER = "masini.txt";
@@ -164,6 +164,31 @@ public class Masina
         + " " + capacitateCilindrica + " " + numarDeLocuri + " " + numarDeUsi + " " + normaDePoluare 
         + " " + culoare;
   }
+  
+  /*public int compareTo(Masina m)
+  {
+    if (marca == m.getMarca())
+    {
+      if (model == m.getModel())
+      {
+        if (combustibil = m.get)
+        {
+        }  
+      }
+    }
+    else
+    {
+      if (marca > m.getMarca() )
+      {
+        return 1;
+      }
+      else
+      {
+        return -1;      
+      }
+      
+    }
+  }*/
   
   //setteri si getteri
   public String getMarca()

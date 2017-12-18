@@ -2,40 +2,52 @@ package InchiriereMasina;
 
 import java.util.ArrayList;
 
-public class Administrare //TODO: convert to singleton
+public final class Administrare extends PublicUI
 {
+
+  static Administrare instance = null;
   private ArrayList<Masina> masini;
-  
-  public Administrare()
+
+  private Administrare()
   {
     masini = new ArrayList<Masina>();
   }
-  
-  public Administrare( ArrayList<Masina> masini )
+
+  static Administrare getInstance()
   {
-    this.masini = masini; 
+    if (instance == null)
+    {
+      instance = new Administrare();
+      instance.load();
+    }
+
+    return instance;
   }
-  
-  public void adaugaMasina( Masina masina )
+
+//  public Administrare(ArrayList<Masina> masini)
+//  {
+//    this.masini = masini;
+//  }
+  public void adaugaMasina(Masina masina)
   {
     masini.add(masina);
   }
-  
-  public void scoateMasina( Masina masina )
+
+  public void scoateMasina(Masina masina)
   {
     masini.remove(masina);
   }
 
   public void save()
   {
-    Masina.save( masini );
+    Masina.save(masini);
   }
-  
+
   public void load()
   {
     masini = Masina.load();
   }
-  
+
   public ArrayList<Masina> getMasini()
   {
     return masini;
@@ -44,5 +56,5 @@ public class Administrare //TODO: convert to singleton
   public void setMasini(ArrayList<Masina> masini)
   {
     this.masini = masini;
-  } 
+  }
 }
