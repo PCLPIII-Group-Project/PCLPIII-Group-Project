@@ -48,6 +48,7 @@ public class MainClass
         case 3:
         {
           iesire = true;
+          System.exit(0);
           break;
         }
         default:
@@ -69,9 +70,9 @@ public class MainClass
       System.out.println("\n\tMeniu:");
       System.out.println("[1] Adauga masina");
       System.out.println("[2] Listeaza masinile");
-      //TODO: adauga meniu: listare clientilor ( cu swing )
       System.out.println("[3] Sterge masina");
-      System.out.println("[4] Iesire");
+      System.out.println("[4] Listarea clientiilor");
+      System.out.println("[5] Iesire");
       System.out.print("\n> Optiune: ");
 
       int option;
@@ -152,6 +153,12 @@ public class MainClass
           break;
         }
         case 4:
+        {
+          //listarea clientiilor
+          AdminUI.listeazaClienti(adm);
+          break;
+        }
+        case 5:
         {
           //iesire
           iesire = true;
