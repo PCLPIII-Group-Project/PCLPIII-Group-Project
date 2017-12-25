@@ -1,13 +1,8 @@
 package InchiriereMasina;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,56 +12,58 @@ public class AdminUI extends PublicUI
 
   public static void adauga(Scanner sc, Administrare adm) throws InputMismatchException
   {
+    sc.nextLine(); //sare pe linia urmatoare, pentru ca in linia respectiva e doar un caracter newline 
+    
     System.out.print("\nMarca: ");
-    String marca = sc.next();
+    String marca = sc.nextLine();
 
     System.out.print("Model: ");
-    String model = sc.next();
+    String model = sc.nextLine();
 
     System.out.print("Combustibil: ");
-    String combustibil = sc.next();
+    String combustibil = sc.nextLine();
 
     System.out.print("Anul de fabricatie: ");
     int anulDeFabricatie = sc.nextInt();
+    sc.nextLine();
 
     System.out.print("Pret pe zi: ");
     double pretPeZi = sc.nextDouble();
-
+    sc.nextLine();
+    
     System.out.print("Cutie de viteza automata (da/nu): ");
-    //TODO: add validation ( if != da/nu => throw InputMismatchException ( NON CASE SENSITIVE! ))
-    boolean cutieDeVitezaAutomata = Util.convertBoolean(sc.next());
+    boolean cutieDeVitezaAutomata = Util.convertBoolean(sc.nextLine());
 
     System.out.print("Data de preluare: (zz/ll/aaaa): ");
-    //TODO: add validation format + correct date + cant be a date from the past
-    //(if not valid => throw InputMismatchException)
-    Data preluare = Data.convert(sc.next());
+    Data preluare = Data.convert(sc.nextLine());
 
     System.out.print("Data de returnare: (zz/ll/aaaa): ");
-    //TODO: add validation format + correct date + cant be a date from the past
-    //(if not valid => throw InputMismatchException)
-    Data returnare = Data.convert(sc.next());
+    Data returnare = Data.convert(sc.nextLine());
 
     System.out.print("Kilometraj: ");
     double kilometraj = sc.nextDouble();
-
+    sc.nextLine();
+    
     System.out.print("Capacitate Cilindrica: ");
     double capacitateCilindrica = sc.nextDouble();
-
+    sc.nextLine();
+    
     System.out.print("Numar de locuri: ");
     int numarDeLocuri = sc.nextInt();
-
+    sc.nextLine();
+    
     System.out.print("Numar de usi: ");
     int numarDeUsi = sc.nextInt();
-
+    sc.nextLine();
+    
     System.out.print("Norma de poluare: ");
-    String normaDePoluare = sc.next();
+    String normaDePoluare = sc.nextLine();
 
     System.out.print("Culoare: ");
-    String culoare = sc.next();
+    String culoare = sc.nextLine();
 
     System.out.print("\n> Salvati datele introduse? (da/nu): ");
-    //TODO: add validation ( if not valid => throw InputMismatchException
-    if (Util.convertBoolean(sc.next()))
+    if (Util.convertBoolean(sc.nextLine()))
     {
       adm.adaugaMasina(new Masina(marca, model, combustibil, anulDeFabricatie,
         pretPeZi, cutieDeVitezaAutomata, preluare,

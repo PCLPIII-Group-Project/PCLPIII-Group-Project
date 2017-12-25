@@ -1,16 +1,35 @@
 package InchiriereMasina;
 
+import java.util.InputMismatchException;
+
 public class Util
 {
-  static boolean convertBoolean( String str )
+
+  static public boolean convertBoolean(String str) throws InputMismatchException
   {
-    str.toLowerCase();
-    if ( str.compareTo( new String("da") ) == 0 )
+    str = str.toLowerCase();
+    
+    if (!validateBoolean(str))
+    {
+      throw new InputMismatchException();
+    }
+    
+    if (str.compareTo(new String("da")) == 0)
     {
       return true;
     }
-    return false; 
+    return false;
   }
-  
-  
+
+  static public boolean validateBoolean(String str)
+  {
+    str = str.toLowerCase();
+    if (str.compareTo(new String("da")) == 0
+      || str.compareTo(new String("nu")) == 0)
+    {
+      return true;
+    }
+    return false;
+  }
+
 }

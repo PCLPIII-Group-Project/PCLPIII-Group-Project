@@ -43,11 +43,11 @@ public class Client
       
       for (int i = 0; i < clienti.size(); i++)
       {
-        fw.write(clienti.get(i).nume + " ");
-        fw.write(clienti.get(i).prenume + " ");
-        fw.write(clienti.get(i).numarDeTelefon + " ");
-        fw.write(clienti.get(i).adresa + " ");
-        fw.write(clienti.get(i).CNP + " \r\n");
+        fw.write(clienti.get(i).nume + ";");
+        fw.write(clienti.get(i).prenume + ";");
+        fw.write(clienti.get(i).numarDeTelefon + ";");
+        fw.write(clienti.get(i).adresa + ";");
+        fw.write(clienti.get(i).CNP + "\r\n");
       }
       
       fw.flush();
@@ -55,7 +55,7 @@ public class Client
     }
     catch( IOException e )
     {
-      e.printStackTrace();
+      System.out.println("A fost o problema cu scrierea fisierului clienti.txt");
     }
   }
   
@@ -67,7 +67,8 @@ public class Client
     try 
     {
       Scanner sc = new Scanner( new File(LOC_FISIER));
-    
+      sc.useDelimiter(";");
+      
       while ( sc.hasNext() )
       {
         String numeClient = sc.next();
@@ -76,6 +77,8 @@ public class Client
         Adresa adresaClient = Adresa.convert( sc.next() );
         String CNPClient = sc.next();
         
+        sc.nextLine();//pentru a sari peste caracterul newline
+        
         clienti.add( new Client( numeClient, prenumeClient, numarDeTelefonClient, adresaClient, CNPClient ) );
       }
       
@@ -83,21 +86,11 @@ public class Client
     }
     catch( FileNotFoundException e )
     {
-      e.printStackTrace();
+      System.out.println("Nu a fost gasit fisierul clienti.txt");
     }
-    catch( InputMismatchException e )
+    catch( Exception e )
     {
-      System.out.println("\n############## ATENTIE!!! ####################################################################");
-      System.out.println("La crearea unui obiect masina sirurile de caracter(String) nu au nevoie sa contina spatiu!!!");
-      System.out.println("Tot ce e citit din fisier cand apare mesajul asta este incorrect!!!");
-      System.out.println("#################################################################################################\n");
-    }
-    catch( NoSuchElementException e )
-    {
-      System.out.println("\n############## ATENTIE!!! ####################################################################");
-      System.out.println("La crearea unui obiect masina sirurile de caracter(String) nu au nevoie sa contina spatiu!!!");
-      System.out.println("Tot ce e citit din fisier cand apare mesajul asta este incorrect!!!");
-      System.out.println("##############################################################################################\n");
+      System.out.println("Fisierul clienti.txt contine date invalide");  
     }
     
     return clienti;

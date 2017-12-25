@@ -73,20 +73,20 @@ public class Masina //implements Comparable<Masina>
       
       for (int i = 0; i < masini.size(); i++)
       {
-        fw.write(masini.get(i).marca + " ");
-        fw.write(masini.get(i).model + " ");
-        fw.write(masini.get(i).combustibil + " ");
-        fw.write(masini.get(i).anulDeFabricare + " ");
-        fw.write(masini.get(i).pretPeZi + " ");
-        fw.write(masini.get(i).cutieDeVitezaAutomata + " ");
-        fw.write(masini.get(i).preluare + " ");
-        fw.write(masini.get(i).returnare + " ");
-        fw.write(masini.get(i).kilometraj + " ");
-        fw.write(masini.get(i).capacitateCilindrica + " ");
-        fw.write(masini.get(i).numarDeLocuri + " ");
-        fw.write(masini.get(i).numarDeUsi + " ");
-        fw.write(masini.get(i).normaDePoluare + " ");
-        fw.write(masini.get(i).culoare + " \r\n");
+        fw.write(masini.get(i).marca + ";");
+        fw.write(masini.get(i).model + ";");
+        fw.write(masini.get(i).combustibil + ";");
+        fw.write(masini.get(i).anulDeFabricare + ";");
+        fw.write(masini.get(i).pretPeZi + ";");
+        fw.write(masini.get(i).cutieDeVitezaAutomata + ";");
+        fw.write(masini.get(i).preluare + ";");
+        fw.write(masini.get(i).returnare + ";");
+        fw.write(masini.get(i).kilometraj + ";");
+        fw.write(masini.get(i).capacitateCilindrica + ";");
+        fw.write(masini.get(i).numarDeLocuri + ";");
+        fw.write(masini.get(i).numarDeUsi + ";");
+        fw.write(masini.get(i).normaDePoluare + ";");
+        fw.write(masini.get(i).culoare + ";\r\n");
       }
       
       fw.flush();
@@ -94,7 +94,7 @@ public class Masina //implements Comparable<Masina>
     }
     catch( IOException e )
     {
-      e.printStackTrace();
+      System.out.println("A fost o problema cu scrierea fisierului masini.txt");
     }
   }
   
@@ -106,7 +106,8 @@ public class Masina //implements Comparable<Masina>
     try 
     {
       Scanner sc = new Scanner( new File(LOC_FISIER));
-    
+      sc.useDelimiter(";");
+        
       while ( sc.hasNext() )
       {
         String marcaMasina = sc.next();
@@ -126,6 +127,8 @@ public class Masina //implements Comparable<Masina>
         String normaDePoluareMasina = sc.next();
         String culoareMasina = sc.next();
         
+        sc.nextLine(); //pentru a sari peste caracterul newline
+        
         masini.add( new Masina( marcaMasina, modelMasina, combustibilMasina, anulDeFabricareMasina, 
             pretPeZiMasina, cutieDeVitezaAutomataMasina, preluareMasina, returnareMasina, 
             kilometrajMasina, capacitateCilindricaMasina, numarDeLocuriMasina, numarDeUsiMasina, 
@@ -136,21 +139,11 @@ public class Masina //implements Comparable<Masina>
     }
     catch( FileNotFoundException e )
     {
-      e.printStackTrace();
+      System.out.println("Nu a fost gasit fisierul masini.txt");
     }
-    catch( InputMismatchException e )
+    catch( Exception e )
     {
-      System.out.println("\n############## ATENTIE!!! ####################################################################");
-      System.out.println("La crearea unui obiect masina sirurile de caracter(String) nu au nevoie sa contina spatiu!!!");
-      System.out.println("Tot ce e citit din fisier cand apare mesajul asta este incorrect!!!");
-      System.out.println("#################################################################################################\n");
-    }
-    catch( NoSuchElementException e )
-    {
-      System.out.println("\n############## ATENTIE!!! ####################################################################");
-      System.out.println("La crearea unui obiect masina sirurile de caracter(String) nu au nevoie sa contina spatiu!!!");
-      System.out.println("Tot ce e citit din fisier cand apare mesajul asta este incorrect!!!");
-      System.out.println("##############################################################################################\n");
+      System.out.println("Fisierul masini.txt contine date invalide");
     }
     
     return masini;
