@@ -1,22 +1,19 @@
 package InchiriereMasina;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Masina //implements Comparable<Masina>
 {
+
   //constante
   static private final String LOC_FISIER = "masini.txt";
-  
+
   //caracteristicile principale
-  
-  //TO-DO: adauga ID
-  
   private String marca;
   private String model;
   private String combustibil;
@@ -25,7 +22,7 @@ public class Masina //implements Comparable<Masina>
   private boolean cutieDeVitezaAutomata;
   private Data preluare;
   private Data returnare;
-  
+
   //caracteristicile secundare
   private double kilometraj;
   private double capacitateCilindrica;
@@ -33,10 +30,10 @@ public class Masina //implements Comparable<Masina>
   private int numarDeUsi;
   private String normaDePoluare;
   private String culoare;
-  
-  public Masina( String marca, String model, String combustibil, int anulDeFabricare, double pretPeZi,
-             boolean cutieDeVitezaAutomata, Data preluare, Data returnare, double kilometraj, double capacitateCilindrica, int numarDeLocuri, 
-             int numarDeUsi, String normaDePoluare, String culoare)
+
+  public Masina(String marca, String model, String combustibil, int anulDeFabricare, double pretPeZi,
+    boolean cutieDeVitezaAutomata, Data preluare, Data returnare, double kilometraj, double capacitateCilindrica, int numarDeLocuri,
+    int numarDeUsi, String normaDePoluare, String culoare)
   {
     this.marca = marca;
     this.model = model;
@@ -53,24 +50,24 @@ public class Masina //implements Comparable<Masina>
     this.normaDePoluare = normaDePoluare;
     this.culoare = culoare;
   }
-  
+
   public Masina()
   {
-    this("", "", "", 0, .0, false, new Data(0,0,0), new Data(0,0,0), .0, .0, 0, 0, "", "");
+    this("", "", "", 0, .0, false, new Data(0, 0, 0), new Data(0, 0, 0), .0, .0, 0, 0, "", "");
   }
-    
+
   //salvare
-  static void save(ArrayList<Masina> masini) //TODO: change file type to csv
+  static void save(ArrayList<Masina> masini)
   {
-    if (masini == null || masini.size() == 0)
+    if (masini == null || masini.isEmpty())
     {
       return;
     }
-    
+
     try
     {
-      FileWriter fw = new FileWriter( new File(LOC_FISIER) );
-      
+      FileWriter fw = new FileWriter(new File(LOC_FISIER)); //XXX:2
+
       for (int i = 0; i < masini.size(); i++)
       {
         fw.write(masini.get(i).marca + ";");
@@ -88,27 +85,28 @@ public class Masina //implements Comparable<Masina>
         fw.write(masini.get(i).normaDePoluare + ";");
         fw.write(masini.get(i).culoare + ";\r\n");
       }
-      
+
       fw.flush();
       fw.close();
     }
-    catch( IOException e )
+    catch (IOException e)
     {
+
       System.out.println("A fost o problema cu scrierea fisierului masini.txt");
     }
   }
-  
+
   //incarcare
   static ArrayList<Masina> load()
   {
-    ArrayList<Masina> masini = new ArrayList<Masina>();
-    
-    try 
+    ArrayList<Masina> masini = new ArrayList<>();
+
+    try
     {
-      Scanner sc = new Scanner( new File(LOC_FISIER));
+      Scanner sc = new Scanner(new File(LOC_FISIER)); //XXX:1
       sc.useDelimiter(";");
-        
-      while ( sc.hasNext() )
+
+      while (sc.hasNext())
       {
         String marcaMasina = sc.next();
         String modelMasina = sc.next();
@@ -116,73 +114,56 @@ public class Masina //implements Comparable<Masina>
         int anulDeFabricareMasina = sc.nextInt();
         double pretPeZiMasina = sc.nextDouble();
         boolean cutieDeVitezaAutomataMasina = sc.nextBoolean();
-        
-        Data preluareMasina = Data.convert( sc.next() );
-        Data returnareMasina = Data.convert( sc.next() );
-        
+
+        Data preluareMasina = Data.convert(sc.next());
+        Data returnareMasina = Data.convert(sc.next());
+
         double kilometrajMasina = sc.nextDouble();
         double capacitateCilindricaMasina = sc.nextDouble();
         int numarDeLocuriMasina = sc.nextInt();
         int numarDeUsiMasina = sc.nextInt();
         String normaDePoluareMasina = sc.next();
         String culoareMasina = sc.next();
-        
+
         sc.nextLine(); //pentru a sari peste caracterul newline
-        
-        masini.add( new Masina( marcaMasina, modelMasina, combustibilMasina, anulDeFabricareMasina, 
-            pretPeZiMasina, cutieDeVitezaAutomataMasina, preluareMasina, returnareMasina, 
-            kilometrajMasina, capacitateCilindricaMasina, numarDeLocuriMasina, numarDeUsiMasina, 
-            normaDePoluareMasina, culoareMasina ) );
+
+        masini.add(new Masina(marcaMasina, modelMasina, combustibilMasina, anulDeFabricareMasina,
+          pretPeZiMasina, cutieDeVitezaAutomataMasina, preluareMasina, returnareMasina,
+          kilometrajMasina, capacitateCilindricaMasina, numarDeLocuriMasina, numarDeUsiMasina,
+          normaDePoluareMasina, culoareMasina));
       }
-      
+
       sc.close();
     }
-    catch( FileNotFoundException e )
+    catch (FileNotFoundException e)
     {
+      LogThread log = new LogThread();
+      log.addLog("Nu a fost gasit fisierul masini.txt");
+      log.start();
+
       System.out.println("Nu a fost gasit fisierul masini.txt");
     }
-    catch( Exception e )
+    catch (Exception e)
     {
+      LogThread log = new LogThread();
+      log.addLog("Fisierul masini.txt contine date invalide");
+      log.start();
+
       System.out.println("Fisierul masini.txt contine date invalide");
     }
-    
+
     return masini;
   }
 
   @Override
   public String toString()
   {
-    return marca + " " + model + " " + combustibil + " " + anulDeFabricare + " " + pretPeZi 
-        + " " + cutieDeVitezaAutomata + " " + preluare + " " + returnare + " " + kilometraj 
-        + " " + capacitateCilindrica + " " + numarDeLocuri + " " + numarDeUsi + " " + normaDePoluare 
-        + " " + culoare;
+    return marca + " " + model + " " + combustibil + " " + anulDeFabricare + " " + pretPeZi
+      + " " + cutieDeVitezaAutomata + " " + preluare + " " + returnare + " " + kilometraj
+      + " " + capacitateCilindrica + " " + numarDeLocuri + " " + numarDeUsi + " " + normaDePoluare
+      + " " + culoare;
   }
-  
-  /*public int compareTo(Masina m)
-  {
-    if (marca == m.getMarca())
-    {
-      if (model == m.getModel())
-      {
-        if (combustibil = m.get)
-        {
-        }  
-      }
-    }
-    else
-    {
-      if (marca > m.getMarca() )
-      {
-        return 1;
-      }
-      else
-      {
-        return -1;      
-      }
-      
-    }
-  }*/
-  
+
   //setteri si getteri
   public String getMarca()
   {
@@ -323,6 +304,5 @@ public class Masina //implements Comparable<Masina>
   {
     this.culoare = culoare;
   }
-  
- 
+
 }

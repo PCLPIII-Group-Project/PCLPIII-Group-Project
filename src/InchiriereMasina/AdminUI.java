@@ -1,19 +1,20 @@
 package InchiriereMasina;
 
+import InchiriereMasina.InterfataGrafica.AdaugaMasinaFrame;
+import InchiriereMasina.InterfataGrafica.TabelFrame;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
-public class AdminUI extends PublicUI
+public class AdminUI extends PublicUI //XXX:4
 {
 
+  @Deprecated
   public static void adauga(Scanner sc, Administrare adm) throws InputMismatchException
   {
     sc.nextLine(); //sare pe linia urmatoare, pentru ca in linia respectiva e doar un caracter newline 
-    
+
     System.out.print("\nMarca: ");
     String marca = sc.nextLine();
 
@@ -30,7 +31,7 @@ public class AdminUI extends PublicUI
     System.out.print("Pret pe zi: ");
     double pretPeZi = sc.nextDouble();
     sc.nextLine();
-    
+
     System.out.print("Cutie de viteza automata (da/nu): ");
     boolean cutieDeVitezaAutomata = Util.convertBoolean(sc.nextLine());
 
@@ -43,19 +44,19 @@ public class AdminUI extends PublicUI
     System.out.print("Kilometraj: ");
     double kilometraj = sc.nextDouble();
     sc.nextLine();
-    
+
     System.out.print("Capacitate Cilindrica: ");
     double capacitateCilindrica = sc.nextDouble();
     sc.nextLine();
-    
+
     System.out.print("Numar de locuri: ");
     int numarDeLocuri = sc.nextInt();
     sc.nextLine();
-    
+
     System.out.print("Numar de usi: ");
     int numarDeUsi = sc.nextInt();
     sc.nextLine();
-    
+
     System.out.print("Norma de poluare: ");
     String normaDePoluare = sc.nextLine();
 
@@ -71,6 +72,13 @@ public class AdminUI extends PublicUI
         numarDeLocuri, numarDeUsi, normaDePoluare, culoare));
       adm.save();
     }
+
+  }
+
+  public static void adaugaMasinaGUI(Administrare adm)
+  {
+    AdaugaMasinaFrame frame = new AdaugaMasinaFrame(adm); //XXX:7
+    frame.setVisible(true);
   }
 
   public static void sterge(Administrare adm, Scanner sc) throws InputMismatchException, IndexOutOfBoundsException
@@ -82,7 +90,7 @@ public class AdminUI extends PublicUI
 
     int option = sc.nextInt();
 
-    if (option == adm.getMasini().size() + 1)
+    if (option == adm.getMasini().size() + 1) //cand este ales optiunea "iesire"
     {
       return;
     }
@@ -95,6 +103,10 @@ public class AdminUI extends PublicUI
   {
     ArrayList<Client> clienti = adm.getClienti();
 
+    //copie pentru sortare
+    ArrayList<Client> copie = new ArrayList<>(clienti); //XXX:10
+    Collections.sort(copie); //XXX:9
+
     Object[] columnNames =
     {
       "Nume", "Prenume", "Numar de telefon", "Adresa", "CNP"
@@ -102,22 +114,16 @@ public class AdminUI extends PublicUI
 
     Object[][] rowData = new Object[clienti.size()][5];
 
-    for (int i = 0; i < clienti.size(); i++)
+    for (int i = 0; i < copie.size(); i++)
     {
-      rowData[i][0] = clienti.get(i).getNume();
-      rowData[i][1] = clienti.get(i).getPrenume();
-      rowData[i][2] = clienti.get(i).getNumarDeTelefon();
-      rowData[i][3] = clienti.get(i).getAdresa();
-      rowData[i][4] = clienti.get(i).getCNP();
+      rowData[i][0] = copie.get(i).getNume();
+      rowData[i][1] = copie.get(i).getPrenume();
+      rowData[i][2] = copie.get(i).getNumarDeTelefon();
+      rowData[i][3] = copie.get(i).getAdresa();
+      rowData[i][4] = copie.get(i).getCNP();
     }
 
-    JTable table = new JTable(rowData, columnNames);
-    table.setBounds(30, 40, 200, 300);
-
-    JScrollPane scrollPane = new JScrollPane(table);
-
-    JFrame frame = new JFrame();
-    frame.add(scrollPane);
+    TabelFrame frame = new TabelFrame("Clienti", columnNames, rowData); //XXX:7
     frame.setSize(1000, 200);
     frame.setVisible(true);
   }

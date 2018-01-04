@@ -2,3 +2,5 @@ Audi;RS7;Benzina;2017;500.0;false;27/11/2017;1/1/2018;10205.12;4000.0;5;5;Euro2;
 Tesla;Roadster;Electricitate;2017;300.0;true;26/11/2017;1/2/2018;1005.22;4000.0;2;3;NuPoluaza;RosuInchis;
 Aston Martin;DB 9;Diesel;2012;200.0;false;12/12/2017;25/12/2017;8902.0;2000.0;2;3;Euro 3;Albastru Inchis;
 Aston Martin;DB 7;Benzina;2012;200.0;true;12/12/2017;24/12/2017;987.0;4000.0;2;3;Euro 2;Rosu Inchis;
+Aston Martin;DB9;Diesel;2017;300.0;true;2/1/2018;10/1/2018;129108.0;2999.0;5;5;Euro2;Albastru Inchis;
+Ferrari;LaFerrari;Benzina;2017;2999.0;true;2/1/2018;10/1/2018;29841.0;4000.0;2;3;Euro5;Rosu;

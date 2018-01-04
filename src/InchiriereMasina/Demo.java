@@ -2,6 +2,7 @@ package InchiriereMasina;
 
 import java.util.ArrayList;
 
+//TODO: delete this class
 public class Demo
 {
   public static void main(String[] args)
@@ -12,7 +13,7 @@ public class Demo
     Masina m2 = new Masina("Tesla", "Roadster", "Electricitate", 2017, 300.00, true, new Data(26, 11, 2017),
         new Data(1, 2, 2018), 1005.22, 4000, 2, 3, "NuPoluaza", "RosuInchis");
     
-    ArrayList<Masina> masini = new ArrayList<Masina>();
+    ArrayList<Masina> masini = new ArrayList<>();
     
     masini.add(m1);
     masini.add(m2);

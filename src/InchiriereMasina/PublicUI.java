@@ -1,8 +1,6 @@
 package InchiriereMasina;
 
 import ThirdParty.com.github.mrebhan.crogamp.cli.TableList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class PublicUI
 {

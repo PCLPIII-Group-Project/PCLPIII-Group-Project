@@ -9,56 +9,88 @@ public class MainClass
 
   public static void main(String[] args)
   {
-    Administrare adm = Administrare.getInstance();
+    LogThread logStart = new LogThread();
+    logStart.addLog("Programul a fost pornit");
+    logStart.start();
 
-    Scanner sc = new Scanner(System.in);
-
-    boolean iesire = false;
-    while (!iesire)
+    try
     {
-      System.out.println("\n[1] Administrare");
-      System.out.println("[2] Public");
-      System.out.println("[3] Iesire");
-      System.out.print("\n> Alegeti o optiune: ");
+      Administrare adm = Administrare.getInstance();
 
-      int option;
+      Scanner sc = new Scanner(System.in);
 
+      boolean iesire = false;
+      while (!iesire)
+      {
+        System.out.println("\n[1] Administrare");
+        System.out.println("[2] Public");
+        System.out.println("[3] Iesire");
+        System.out.print("\n> Alegeti o optiune: ");
+
+        int option;
+
+        try
+        {
+          option = sc.nextInt();
+        }
+        catch (InputMismatchException e)
+        {
+          option = -1;
+          sc = new Scanner(System.in);
+        }
+
+        switch (option)
+        {
+          case 1:
+          {
+            administrare(adm, sc);
+            break;
+          }
+          case 2:
+          {
+            publica(adm, sc);
+            break;
+          }
+          case 3:
+          {
+            iesire = true;
+
+            LogThread logStop = new LogThread();
+            logStop.addLog("Programul a oprit\n");
+            logStop.start();
+            logStop.join(); //asteapta pana cand threadul termina scrierea, inainte de inchiderea programului
+
+            System.exit(0);
+            break;
+          }
+          default:
+          {
+            System.out.println("\n> Optiune invalida");
+          }
+        }
+      }
+
+      sc.close();
+    }
+    catch (Exception e) //prindem toate exceptiile neprinse (daca e cazul)
+    {
+      LogThread logUnexpected = new LogThread();
+      logUnexpected.addLog("Programul a oprit din cauze neasteptate\n");
+      logUnexpected.start();
+      
       try
       {
-        option = sc.nextInt();
+        logUnexpected.join();
       }
-      catch (InputMismatchException e)
+      catch (InterruptedException ex)
       {
-        option = -1;
-        sc = new Scanner(System.in);
+        
       }
 
-      switch (option)
-      {
-        case 1:
-        {
-          administrare(adm, sc);
-          break;
-        }
-        case 2:
-        {
-          publica(adm, sc);
-          break;
-        }
-        case 3:
-        {
-          iesire = true;
-          System.exit(0);
-          break;
-        }
-        default:
-        {
-          System.out.println("\n> Optiune invalida");
-        }
-      }
+      System.out.println("Oops! Something went wrong. :/");
     }
-
-    sc.close();
+    
+    System.exit(0);
   }
 
   public static void administrare(Administrare adm, Scanner sc)
@@ -98,7 +130,8 @@ public class MainClass
           {
             try
             {
-              AdminUI.adauga(sc, adm);
+              //AdminUI.adauga(sc, adm);
+              AdminUI.adaugaMasinaGUI(adm);
               isValid = true;
             }
             catch (InputMismatchException e)
@@ -124,7 +157,7 @@ public class MainClass
           }
           catch (IOException e)
           {
-            e.printStackTrace();
+            e.printStackTrace(); 
           }
 
           break;
@@ -180,7 +213,7 @@ public class MainClass
     while (!iesire)
     {
       PublicUI.listeaza(adm);
-      
+
       System.out.println("\n[1] Aplica filtru");
       System.out.println("[2] Iesire");
       System.out.print("\n> Alegeti o optiune: ");

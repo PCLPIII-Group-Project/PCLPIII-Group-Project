@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public final class Administrare extends PublicUI
 {
 
-  static Administrare instance = null;
-  private ArrayList<Masina> masini;
-  private ArrayList<Client> clienti;
+  private static Administrare instance = null;
+  private ArrayList<Masina> masini; //XXX:10  
+  private ArrayList<Client> clienti; //XXX:10
 
   private Administrare()
   {
-    masini = new ArrayList<Masina>();
-    clienti = new ArrayList<Client>();
+    masini = new ArrayList<>();
+    clienti = new ArrayList<>();
   }
 
   static Administrare getInstance()
@@ -28,15 +28,20 @@ public final class Administrare extends PublicUI
   }
 
   //masina
-
   public void adaugaMasina(Masina masina)
   {
-    masini.add(masina);
+    if (masina != null)
+    {
+      masini.add(masina);
+    }
   }
 
   public void scoateMasina(Masina masina)
   {
-    masini.remove(masina);
+    if (masina != null)
+    {
+      masini.remove(masina);
+    }
   }
 
   public void save()
@@ -58,17 +63,22 @@ public final class Administrare extends PublicUI
   {
     this.masini = masini;
   }
-  
+
   //client
-  
   public void adaugaClient(Client client)
   {
-    clienti.add(client);
+    if (client != null)
+    {
+      clienti.add(client);
+    }
   }
 
   public void scoateClient(Client client)
   {
-    clienti.remove(client);
+    if (client != null)
+    {
+      clienti.remove(client);
+    }
   }
 
   public void saveClient()
@@ -79,13 +89,13 @@ public final class Administrare extends PublicUI
   public void loadClient()
   {
     clienti = Client.load();
-  } 
-  
+  }
+
   public void setClienti(ArrayList<Client> clienti)
   {
     this.clienti = clienti;
   }
-  
+
   public ArrayList<Client> getClienti()
   {
     return clienti;

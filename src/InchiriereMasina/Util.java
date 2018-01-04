@@ -14,7 +14,7 @@ public class Util
       throw new InputMismatchException();
     }
     
-    if (str.compareTo(new String("da")) == 0)
+    if (str.compareTo("da") == 0)
     {
       return true;
     }
@@ -24,8 +24,8 @@ public class Util
   static public boolean validateBoolean(String str)
   {
     str = str.toLowerCase();
-    if (str.compareTo(new String("da")) == 0
-      || str.compareTo(new String("nu")) == 0)
+    if (str.compareTo("da") == 0
+      || str.compareTo("nu") == 0)
     {
       return true;
     }
