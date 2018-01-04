@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+                       //XXX:4
 public class LogThread extends Thread //XXX:3
 {
   private static final String LOG_FILE_NAME = "log.txt";
@@ -67,7 +67,7 @@ public class LogThread extends Thread //XXX:3
     
     for(String line : messages)
     {
-      fw.write(line + "\n");
+      fw.write(line + "\r\n");
     }
     
     fw.close();

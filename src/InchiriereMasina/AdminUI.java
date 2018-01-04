@@ -83,7 +83,7 @@ public class AdminUI extends PublicUI //XXX:4
 
   public static void sterge(Administrare adm, Scanner sc) throws InputMismatchException, IndexOutOfBoundsException
   {
-    listeaza(adm);
+    listeaza(adm.getMasini());
     System.out.println(" " + (adm.getMasini().size() + 1) + "   | Iesire");
 
     System.out.print("\n> Selectati masina care vreti sa stergeti: ");

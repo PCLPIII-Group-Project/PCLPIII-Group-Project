@@ -1,11 +1,14 @@
 package InchiriereMasina;
 
 import ThirdParty.com.github.mrebhan.crogamp.cli.TableList;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class PublicUI
 {
 
-  public static void listeaza(Administrare adm)
+  public static void listeaza(ArrayList<Masina> masini)
   {
     TableList tl = new TableList(15, "Nr.", "Marca", "Model", "Combustibil", "Anul de fabricare",
       "Pret/Zi", "Cutie de viteza automata", "Data de preluare", "Data de returnare", "Kilometraj",
@@ -15,14 +18,14 @@ public class PublicUI
     System.out.println();
 
     int i = 1;
-    for (Masina m : adm.getMasini())
+    for (Masina m : masini)
     {
-      tl.addRow(new Integer(i).toString(), m.getMarca(), m.getModel(), m.getCombustibil(),
-        new Integer(m.getAnulDeFabricare()).toString(), new Double(m.getPretPeZi()).toString(),
+      tl.addRow(Integer.toString(i), m.getMarca(), m.getModel(), m.getCombustibil(),
+        Integer.toString(m.getAnulDeFabricare()), Double.toString(m.getPretPeZi()),
         (m.getCutieDeVitezaAutomata() ? "da" : "nu"), m.getPreluare().toString(),
-        m.getReturnare().toString(), new Double(m.getKilometraj()).toString(),
-        new Double(m.getCapacitateCilindrica()).toString(),
-        new Integer(m.getNumarDeLocuri()).toString(), new Integer(m.getNumarDeUsi()).toString(),
+        m.getReturnare().toString(), Double.toString(m.getKilometraj()),
+        Double.toString(m.getCapacitateCilindrica()),
+        Integer.toString(m.getNumarDeLocuri()), Integer.toString(m.getNumarDeUsi()),
         m.getNormaDePoluare(), m.getCuloare());
       i++;
     }
@@ -30,5 +33,10 @@ public class PublicUI
     tl.print();
   }
 
-  //TODO: implement filtering
+  public static void rearanjare(Administrare adm, Comparator<Masina> comp)
+  {
+    ArrayList<Masina> copie = new ArrayList<>(adm.getMasini()); //XXX:10
+    Collections.sort(copie, comp);
+    listeaza(copie);
+  }
 }

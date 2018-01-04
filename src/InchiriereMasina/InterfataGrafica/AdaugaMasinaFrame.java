@@ -3,7 +3,10 @@ package InchiriereMasina.InterfataGrafica;
 import InchiriereMasina.Administrare;
 import InchiriereMasina.Data;
 import InchiriereMasina.Masina;
+import InchiriereMasina.SettariDeInterfataGrafica.Proprietate;
+import InchiriereMasina.SettariDeInterfataGrafica.SetariAdaugareMasina;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -18,7 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+                               //XXX:4
 public class AdaugaMasinaFrame extends JFrame implements ActionListener, WindowListener//XXX:7
 {
   //TODO: replace adm arguments to getInstance
@@ -26,12 +29,16 @@ public class AdaugaMasinaFrame extends JFrame implements ActionListener, WindowL
   private JPanel fields;
   private JPanel buttons;
   private Administrare adm;
+  private SetariAdaugareMasina setari;
 
   public AdaugaMasinaFrame(Administrare adm)
-  {
+  { 
     super("Adauga masina");
     super.setLayout(new BorderLayout(10, 10));
 
+    setari = new SetariAdaugareMasina();
+    setari.load();
+    
     initLabels();
     initFields();
     initButtons();
@@ -50,12 +57,12 @@ public class AdaugaMasinaFrame extends JFrame implements ActionListener, WindowL
   @Override
   public void actionPerformed(ActionEvent e)
   {
-    if (e.getActionCommand().equals("Save"))
+    if (e.getActionCommand().equals("Salvare"))
     {
       Component[] comp = fields.getComponents();
 
       try
-      { //prelucrarea datelor
+      { //prelucrarea datelor = conversii + validare 
         String marca = ((JTextField) comp[0]).getText();
         String model = ((JTextField) comp[1]).getText();
         String combustibil = ((JTextField) comp[2]).getText();
@@ -85,7 +92,7 @@ public class AdaugaMasinaFrame extends JFrame implements ActionListener, WindowL
         dialog.setVisible(true);
       }
     }
-    else if (e.getActionCommand().equals("Cancel"))
+    else if (e.getActionCommand().equals("Iesire"))
     {
       this.setVisible(false);
       this.dispose();
@@ -139,12 +146,23 @@ public class AdaugaMasinaFrame extends JFrame implements ActionListener, WindowL
     buttons = new JPanel();
     buttons.setLayout(new GridLayout(1, 2, 10, 0));
 
-    JButton save = new JButton("Save");
+    JButton save = new JButton("Salvare");
     save.addActionListener(this);
+    
+    Color color;
+    if ((color = setari.cautaProprietatea(SetariAdaugareMasina.SAVE_BUTTON_BKG)) != null)
+    {
+      save.setBackground(color);  
+    }
 
-    JButton cancel = new JButton("Cancel");
+    JButton cancel = new JButton("Iesire");
     cancel.addActionListener(this);
 
+    if ((color = setari.cautaProprietatea(SetariAdaugareMasina.CANCEL_BUTTON_BKG)) != null)
+    {
+      cancel.setBackground(color);  
+    }
+    
     buttons.add(save);
     buttons.add(cancel);
   }
