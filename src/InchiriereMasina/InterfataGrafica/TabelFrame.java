@@ -20,7 +20,7 @@ public class TabelFrame extends JFrame //XXX:7
 
     setari = new SetariTabel();
     setari.load();
-    
+
     Color color;
     if ((color = setari.cautaProprietatea(SetariTabel.TABLE_BKG)) != null)
     {
@@ -31,5 +31,15 @@ public class TabelFrame extends JFrame //XXX:7
 
     super.add(scrollPane);
     super.pack();
+  }
+
+  @Override
+  public void toFront()
+  {
+    super.setAlwaysOnTop(true);
+    super.toFront();
+    super.requestFocus();
+    super.repaint();
+    super.setAlwaysOnTop(false);
   }
 }

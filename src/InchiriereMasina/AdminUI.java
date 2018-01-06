@@ -79,6 +79,7 @@ public class AdminUI extends PublicUI //XXX:4
   {
     AdaugaMasinaFrame frame = new AdaugaMasinaFrame(adm); //XXX:7
     frame.setVisible(true);
+    frame.toFront();
   }
 
   public static void sterge(Administrare adm, Scanner sc) throws InputMismatchException, IndexOutOfBoundsException
@@ -126,5 +127,6 @@ public class AdminUI extends PublicUI //XXX:4
     TabelFrame frame = new TabelFrame("Clienti", columnNames, rowData); //XXX:7
     frame.setSize(1000, 200);
     frame.setVisible(true);
+    frame.toFront();
   }
 }

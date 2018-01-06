@@ -3,7 +3,6 @@ package InchiriereMasina.InterfataGrafica;
 import InchiriereMasina.Administrare;
 import InchiriereMasina.Data;
 import InchiriereMasina.Masina;
-import InchiriereMasina.SettariDeInterfataGrafica.Proprietate;
 import InchiriereMasina.SettariDeInterfataGrafica.SetariAdaugareMasina;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -24,7 +23,6 @@ import javax.swing.JTextField;
                                //XXX:4
 public class AdaugaMasinaFrame extends JFrame implements ActionListener, WindowListener//XXX:7
 {
-  //TODO: replace adm arguments to getInstance
   private JPanel labels;
   private JPanel fields;
   private JPanel buttons;
@@ -97,6 +95,16 @@ public class AdaugaMasinaFrame extends JFrame implements ActionListener, WindowL
       this.setVisible(false);
       this.dispose();
     }
+  }
+
+  @Override
+  public void toFront()
+  {
+    super.setAlwaysOnTop(true);
+    super.toFront();
+    super.requestFocus();
+    super.repaint();
+    super.setAlwaysOnTop(false);
   }
 
   private void initLabels()
